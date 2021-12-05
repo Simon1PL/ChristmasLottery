@@ -6,7 +6,13 @@
   font-size: 27px;
 }
 
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .user {
+    width: 33%;
     cursor: pointer;
 }
 
