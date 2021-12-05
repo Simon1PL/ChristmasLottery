@@ -19,10 +19,6 @@ export class UserComponent implements OnInit {
       const id = params['id'];
       this.http.get<UserData>(this.baseUrl + 'api/user/getSingle/' + id).subscribe(result => {
         this.user = result;
-        if (this.user.giftForUser) {
-          this.user.giftForUser.wants = this.user.giftForUser.wants.replace(/\/n/g, "<br>");
-          console.log(this.user.giftForUser.wants);
-        }
       }, error => console.error(error));
     });
   }
