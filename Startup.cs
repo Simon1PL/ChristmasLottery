@@ -82,7 +82,7 @@ namespace ChristmasLottery
                 }
             });
 
-            UpgradeDatabase(app);
+            //UpgradeDatabase(app);
         }
 
         private void UpgradeDatabase(IApplicationBuilder app)
