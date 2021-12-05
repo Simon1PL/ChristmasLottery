@@ -81,6 +81,20 @@ namespace ChristmasLottery
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+
+            UpgradeDatabase(app);
+        }
+
+        private void UpgradeDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<DatabaseContext>();
+                if (context != null && context.Database != null)
+                {
+                    context.Database.Migrate();
+                }
+            }
         }
     }
 }

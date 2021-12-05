@@ -55,18 +55,30 @@ namespace ChristmasLottery.Controllers
         }
 
         [HttpPost]
-        public void FillDb([FromBody] string password)
+        public void FillDb([FromBody] FillDbCommandModel fillDbCommand)
         {
-            if (password != "saicxs")
+            if (fillDbCommand.Password != "saicxs")
             {
                 Response.StatusCode = (int)HttpStatusCode.Forbidden;
                 return;
             }
 
-            _context.Database.EnsureDeleted();
-            _context.Database.EnsureCreated();
+            foreach (var user in _context.Users.ToList())
+            {
+                user.GiftForUserId = null;
+            }
 
-            string[] usersNames = { "Barbara B", "Teresa Z", "Zofia Z", "Maciej B", "Barbara Z" };
+            _context.SaveChanges();
+
+            foreach (var user in _context.Users.ToList())
+            {
+                _context.Users.Remove(user);
+            }
+
+            var usersNames = fillDbCommand.Users; 
+            if (usersNames == null || usersNames.Count == 0) {
+                usersNames = new List<string>(){ "Barbara B", "Teresa Z", "Zofia Z", "Maciej B", "Barbara Z" };
+            }
             var users = new List<UserData>();
             foreach (var user in usersNames)
             {
@@ -98,4 +110,10 @@ namespace ChristmasLottery.Controllers
             _context.SaveChanges();
         }
     }
+}
+
+public class FillDbCommandModel
+{
+    public string Password { get; set; }
+    public List<string> Users { get; set; }
 }
