@@ -12,7 +12,13 @@
 }
 
 .user {
-    width: 33%;
-    cursor: pointer;
+  width: 33%;
+  cursor: pointer;
 }
 
+@media only screen and (max-width: 768px) {
+  .user {
+    font-size: 17px;
+    width: 50%;
+  }
+}
