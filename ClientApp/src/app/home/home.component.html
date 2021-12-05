@@ -1,0 +1,10 @@
+<div class="body">
+  Christmas Lottery
+  <br />
+  Wybierz siebie
+  <hr />
+  <div *ngFor="let user of users; let i = index" (click)="chooseUser(user)" class="user">
+    {{i + 1}}. {{user.userName}}
+    <hr />
+  </div>
+</div>

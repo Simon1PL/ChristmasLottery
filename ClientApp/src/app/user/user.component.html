@@ -1,0 +1,14 @@
+<div class="body">
+  Wylosowales:
+  <p style="font-size: 32px;">{{user.giftForUser?.userName}}</p>
+  Pomysły na prezent:
+  <br />
+  <p style="white-space: pre-line;">
+    {{user.giftForUser?.wants == null ? "Brak" : user.giftForUser.wants}}
+  </p>
+  What you want for christmas is:
+  <br />
+  <textarea style="width: 100%; height: 200px" [(ngModel)]="user.wants" #userWants="ngModel" name="userWants" type="text" placeholder=""></textarea>
+  <br />
+  <button (click)="saveUser()">save</button>
+</div>
