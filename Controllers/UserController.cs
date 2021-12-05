@@ -77,7 +77,7 @@ namespace ChristmasLottery.Controllers
 
             var usersNames = fillDbCommand.Users; 
             if (usersNames == null || usersNames.Count == 0) {
-                usersNames = new List<string>(){ "Barbara B", "Teresa Z", "Zofia Z", "Maciej B", "Barbara Z" };
+                usersNames = new List<string>(){ "Agata Z", "Jarek Z", "Kamil Z", "Basia Z", "Piotr B", "Małgorzata B", "Maciej B", "Bartek B", "Julek B", "Barbara B", "Jerzy B", "Marcin Z", "Małgorzata Z", "Teresa Z", "Zofia Z", "Szymon Z", "Filip Z", "Helena Z" };
             }
             var users = new List<UserData>();
             foreach (var user in usersNames)
