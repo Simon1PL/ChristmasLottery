@@ -1,7 +1,10 @@
 using ChristmasLottery.Database;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Server.IISIntegration;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +26,7 @@ namespace ChristmasLottery
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSwaggerGen();
+
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
@@ -33,6 +37,7 @@ namespace ChristmasLottery
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

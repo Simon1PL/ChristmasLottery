@@ -11,20 +11,20 @@ import { UserData } from '../models/userData';
 export class UserComponent implements OnInit {
   user: UserData = new UserData();
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, @Inject('BASE_URL') private baseUrl: string) {
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, public activatedRoute: ActivatedRoute, @Inject('BASE_URL') private baseUrl: string) {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      const id = params['id'];
-      this.http.get<UserData>(this.baseUrl + 'api/user/getSingle/' + id).subscribe(result => {
-        this.user = result;
-      }, error => console.error(error));
+    this.activatedRoute.paramMap.subscribe(() => {
+      this.user = window.history.state["user"] as UserData;
+      if (!this.user) {
+        this.router.navigate(['/']);
+      }
     });
   }
 
   saveUser() {
-    this.http.post(this.baseUrl + 'api/user/post', this.user).subscribe(result => {
+    this.http.put(this.baseUrl + 'api/user/saveUser', this.user).subscribe(result => {
       alert("zapisane");
     }, error => console.error(error));
   }
