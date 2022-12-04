@@ -1,19 +1,5 @@
 <div class="body">
   Christmas Lottery
-  <ng-container *ngIf="user != null">
-    <br />
-    <br />
-    <p *ngIf="!user.hasPassword">
-      {{user.userName}} ustaw hasło:
-    </p>
-    <p *ngIf="user.hasPassword">
-      {{user.userName}} wpisz swoje hasło:
-    </p>
-    <input autofocus required (keyup.enter)="checkPassword()" [(ngModel)]="user.password" />
-    <button (click)="checkPassword()">Ok</button>
-    <br />
-  </ng-container>
-
   <br />
   Wybierz siebie
   <hr />

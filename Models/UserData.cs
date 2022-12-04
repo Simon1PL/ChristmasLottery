@@ -15,7 +15,6 @@ namespace ChristmasLottery
         public string Wants { get; set; }
 
         public string Picture { get; set; }
-        public string Password { get; set; }
 
     }
 }

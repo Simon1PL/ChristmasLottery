@@ -10,7 +10,6 @@ import { UserData } from '../models/userData';
 })
 export class HomeComponent implements OnInit {
   users: UserData[];
-  user: UserData;
 
   constructor(private http: HttpClient, private router: Router, @Inject('BASE_URL') private baseUrl: string) {
   }
@@ -18,26 +17,12 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.http.get<UserData[]>(this.baseUrl + 'api/user/get').subscribe(result => {
       this.users = result;
-      this.users.forEach(u => {
-        u.hasPassword = u.password.toLowerCase() == String(true);
-        u.password = null;
-      });
     }, error => console.error(error));
   }
 
   chooseUser(user: UserData) {
-    this.user = user;
-  }
-
-  checkPassword() {
-    this.http.post(this.baseUrl + 'api/user/getUserByIdAndPassword', { id: this.user.id, password: this.user.password }).subscribe(result => {
-      this.router.navigate(['/user/' + this.user.id], { state: { user: result } });
-    }, error => {
-      if (error.status == 403) {
-        alert("błędne hasło");
-      }
-
-      console.error(error);
-    });
+    if (confirm(user.userName + " czy to Ty? Jeśli nie kliknij CANCEL i wybierz siebie.")) {
+      this.router.navigate(['/user/' + user.id]);
+    }
   }
 }
