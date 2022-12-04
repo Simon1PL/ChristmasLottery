@@ -4,7 +4,5 @@ export class UserData {
   wants: string;
   picture: string;
   id: number;
-  password: string;
-  hasPassword: boolean;
 }
 

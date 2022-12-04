@@ -32,35 +32,24 @@ namespace ChristmasLottery.Controllers
                 },
                 Picture = u.Picture,
                 UserName = u.UserName,
-                Wants = u.Wants,
-                Password = (!string.IsNullOrEmpty(u.Password)).ToString()
+                Wants = u.Wants
             }).ToList();
             return result;
         }
 
-        [HttpPost]
-        public ActionResult<UserData> GetUserByIdAndPassword(GetUserModel getUserModel)
+        [HttpGet]
+        [Route("{id}")]
+        public UserData GetSingle(int id)
         {
-            var result = _context.Users.Include(u => u.GiftForUser).FirstOrDefault(u => u.Id == getUserModel.Id);
-            if (string.IsNullOrEmpty(result.Password))
-            {
-                result.Password = getUserModel.Password;
-                _context.SaveChanges();
-            }
-
-            if (string.IsNullOrEmpty(getUserModel.Password) || result.Password != getUserModel.Password)
-            {
-                return StatusCode(403);  
-            }
-
+            var result = _context.Users.Include(u => u.GiftForUser).FirstOrDefault(u => u.Id == id);
             result.GiftForUser.GiftForUser = null;
             return result;
         }
 
-        [HttpPut]
-        public void SaveUser(UserData user)
+        [HttpPost]
+        public void Post(UserData user)
         {
-            var userFromDb = _context.Users.FirstOrDefault(u => u.Id == user.Id);
+            var userFromDb = _context.Users.Find(user.Id);
             userFromDb.Wants = user.Wants;
             _context.SaveChanges();
         }
@@ -127,10 +116,4 @@ public class FillDbCommandModel
 {
     public string Password { get; set; }
     public List<string> Users { get; set; }
-}
-
-public class GetUserModel
-{
-    public string Password { get; set; }
-    public int Id { get; set; }
 }
