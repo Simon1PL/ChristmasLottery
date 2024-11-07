@@ -23,8 +23,8 @@ namespace ChristmasLottery
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSwaggerGen();
-            services.AddDbContext<DatabaseContext>(options =>
-               options.UseSqlite("Data Source=Database.db"));
+
+            services.AddDbContext<DatabaseContext>(options => options.UseSqlite("Data Source=Database.db"));
             //services.AddDbContext<DatabaseContext>(options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
@@ -35,6 +35,7 @@ namespace ChristmasLottery
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
