@@ -10,12 +10,13 @@ namespace ChristmasLottery.Migrations
                 name: "UserData",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    GiftForUserId = table.Column<int>(type: "int", nullable: true),
-                    Wants = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Picture = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    UserName = table.Column<string>(type: "TEXT", nullable: true),
+                    GiftForUserId = table.Column<int>(type: "INTEGER", nullable: true),
+                    Wants = table.Column<string>(type: "TEXT", nullable: true),
+                    Picture = table.Column<string>(type: "TEXT", nullable: true),
+                    Password = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
