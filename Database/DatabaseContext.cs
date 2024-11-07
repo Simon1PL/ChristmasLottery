@@ -10,6 +10,7 @@ namespace ChristmasLottery.Database
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
+            Database.EnsureCreated();
         }
 
         public DbSet<UserData> Users { get; set; }

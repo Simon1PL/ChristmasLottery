@@ -23,7 +23,9 @@ namespace ChristmasLottery
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSwaggerGen();
-            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
+            services.AddDbContext<DatabaseContext>(options =>
+               options.UseSqlite("Data Source=Database.db"));
+            //services.AddDbContext<DatabaseContext>(options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
